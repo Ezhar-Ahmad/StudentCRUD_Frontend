@@ -1,0 +1,25 @@
+.App {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  text-align: end;
+  margin-top: 20px;
+}
+
+.nav-bar {
+  margin-top: 20px;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
