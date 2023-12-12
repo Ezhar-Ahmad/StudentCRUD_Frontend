@@ -57,7 +57,7 @@ export default function BasicTable(props) {
 
   const deleteData = async (studentId) => {
     await axios
-      .get(`http://localhost:5000/student/delete/?studentId=${studentId}`)
+      .get(`https://localhost:7138/api/Students/?studentId=${studentId}`)
       .then((response) => {
         if (response.statusText === "OK") {
           alert("Deleted");
@@ -71,12 +71,15 @@ export default function BasicTable(props) {
     console.log(studentData);
     studentData.id = updateData._id;
     await axios
-      .post("http://localhost:5000/student/update", studentData)
+      .post(
+        `https://localhost:7138/api/Students/?studentId=${updateData._id}`,
+        studentData
+      )
       .then((response) => {
-        if (response.status === 200) {
-          handleClose();
-          alert("Updated");
-        }
+        //if (response.status === 200) {
+        handleClose();
+        alert("Updated");
+        //}
       })
       .catch((error) => console.log(error));
   };

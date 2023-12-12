@@ -19,9 +19,10 @@ import { ExportToExcel } from "./components/exportToExcel";
 
 function App() {
   const [student, setStudent] = useState({
-    name: "",
-    class: "",
-    section: "",
+    Id: "",
+    Name: "",
+    Class: "",
+    Section: "",
   });
 
   const [open, setOpen] = useState(false);
@@ -41,19 +42,18 @@ function App() {
   };
 
   const getStudents = async () => {
-    await axios
-      .get("http://localhost:5000/students/getStudents")
-      .then((response) => {
-        if (response.status === 200) {
-          setTable(true);
-          //setAllData(response.data.allStudents);
-          dispatch(incrementByAmount(response.data.allStudents));
-        }
-      });
+    //"http://localhost:5000/students/getStudents"
+    await axios.get("https://localhost:7138/api/Students").then((response) => {
+      //if (response.status === 200) {
+      setTable(true);
+      //setAllData(response.data.allStudents);
+      dispatch(incrementByAmount(response.data.allStudents));
+      //}
+    });
   };
   const createData = async () => {
     await axios
-      .post("http://localhost:5000/student/create", student)
+      .post("https://localhost:7138/api/Students", student) //"http://localhost:5000/student/create"
       .then((response) => {
         if (response.status === 201) {
           setOpen(false);
@@ -94,12 +94,24 @@ function App() {
               <TextField
                 autoFocus
                 margin="dense"
+                id="id"
+                label="Id"
+                type="number"
+                variant="standard"
+                onChange={(e) => {
+                  student.Id = e.target.value;
+                }}
+              />
+              <br></br>
+              <TextField
+                autoFocus
+                margin="dense"
                 id="name"
                 label="Name"
                 type="text"
                 variant="standard"
                 onChange={(e) => {
-                  student.name = e.target.value;
+                  student.Name = e.target.value;
                 }}
               />
               <br></br>
@@ -111,7 +123,7 @@ function App() {
                 type="text"
                 variant="standard"
                 onChange={(e) => {
-                  student.class = e.target.value;
+                  student.Class = e.target.value;
                 }}
               />
               <br></br>
@@ -123,7 +135,7 @@ function App() {
                 type="text"
                 variant="standard"
                 onChange={(e) => {
-                  student.section = e.target.value;
+                  student.Section = e.target.value;
                 }}
               />
             </DialogContent>
